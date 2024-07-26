@@ -1,0 +1,520 @@
+local numberOfMonsterButtons = 0
+
+-- All the scripted monster setups by monster card, sleeve, and bag, combat
+monsterTrackerLocations = {
+  {
+    {21.000,2.163,15.155},
+    {21.000,1.931,15.155},
+    {26.964,1.516,15.155},
+    {12.250,1.701,15.155}
+  },
+  {
+    {21.000,2.163,6.062},
+    {21.000,1.931,6.062},
+    {26.964,1.516,6.062},
+    {12.250,1.701,6.062}
+  },
+  {
+    {21.000,2.163,-3.031},
+    {21.00,1.931,-3.031},
+    {26.964,1.516,-3.031},
+    {12.250,1.701,-3.031}
+  },
+  {
+    {21.000,2.163,-12.124},
+    {21.000,1.931,-12.124},
+    {26.964,1.516,-12.124},
+    {12.250,1.701,-12.124}
+  },
+  {
+    {38.500,2.163,15.155},
+    {38.500,1.931,15.155},
+    {32.271,1.516,15.155},
+    {45.500,1.701,15.155}
+  },
+  {
+    {38.500,2.163,6.062},
+    {38.500,1.931,6.062},
+    {32.271,1.516,6.062},
+    {45.500,1.701,6.062}
+  },
+  {
+    {38.500,2.163,-3.031},
+    {38.500,1.931,-3.031},
+    {32.271,1.516,-3.031},
+    {45.500,1.701,-3.031}
+  },
+  {
+    {38.500,2.163,-12.124},
+    {38.500,1.931,-12.124},
+    {32.471,1.516,-12.124},
+    {45.500,1.701,-12.124}
+  }
+}
+
+monsterGuids = {
+  "e3f332","9df9ca","c730cd","97daa4","004793",
+  "b0757d","9f4882","be991d","619a40","55b126",
+  "c0af27","78036b","ba1b23","7d713c","c9454d",
+  "d08a41","a3f91a","7b6374","57c0fb","be4385",
+  "8acbc8","841e56","313763","2d92b3","da2b6b",
+  "a3575a","b31da3","83f1b7","91445c","3f32fa",
+  "d8a4d7","908ebf","d13465","66baf8","b68dac",
+  "1c1ea2","1ad39b","5f3a8f","fc3ee6","c0e253",
+  "b3d0b0","39fba9","3346ba","34ec74","d98f27",
+  "bcc9e3","189219"
+}
+
+-- Monster details
+banditGuard = {
+    Name = "Bandit Guard",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+banditArcher = {
+    Name = "Bandit Archer",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+cityGuard = {
+    Name = "City Guard",
+    CardRotations = {{0,90,0},{0,0,0},{0,270,0},{0,180,0},{0,0,180},{0,270,180},{0,180,180},{0,90,180}},
+    NumOfSpawns = 6
+}
+
+cityArcher = {
+    Name = "City Archer",
+    CardRotations = {{0,90,0},{0,0,0},{0,270,0},{0,180,0},{0,0,180},{0,270,180},{0,180,180},{0,90,180}},
+    NumOfSpawns = 6
+}
+
+inoxArcher = {
+    Name = "Inox Archer",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+inoxShaman = {
+    Name = "Inox Shaman",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+inoxGuard = {
+    Name = "Inox Guard",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+vermlingShaman = {
+    Name = "Vermling Shaman",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+vermlingScout = {
+    Name = "Vermling Scout",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 10
+}
+
+livingBones = {
+    Name = "Living Bones",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 10
+}
+
+livingCorpse = {
+    Name = "Living Corpse",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+livingSpirit = {
+    Name = "Living Spirit",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+flameDemon = {
+    Name = "Flame Demon",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+cultist = {
+    Name = "Cultist",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+earthDemon = {
+    Name = "Eart Demon",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+frostDemon = {
+    Name = "Frost Demon",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+nightDemon = {
+    Name = "Night Demon",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+windDemon = {
+    Name = "Wind Demon",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+giantViper = {
+    Name = "Giant Viper",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+sunDemon = {
+    Name = "Sun Demon",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+caveBear = {
+    Name = "Cave Bear",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 4
+}
+
+ooze = {
+    Name = "Ooze",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 10
+}
+
+forestImp = {
+    Name = "Forest Imp",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+ancientArtillery = {
+    Name = "Ancient Artillery",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+stoneGolem = {
+    Name = "Stone Golem",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+deepTerror = {
+    Name = "Deep Terror",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 10
+}
+
+rendingDrake = {
+    Name = "Rending Drake",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+spittingDrake = {
+    Name = "Spitting Drake",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+lurker = {
+    Name = "Lurker",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+blackImp = {
+    Name = "Black Imp",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 10
+}
+
+savvasLavaflow = {
+    Name = "Savvas Lavaflow",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+savvasIcestorm = {
+    Name = "Savvas Icestorm",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+harrowerInfester = {
+    Name = "Harrower Infester",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+hound = {
+    Name = "Hound",
+    CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    NumOfSpawns = 6
+}
+
+function updateSave()
+  local data_to_save = {["ml"]=memoryList}
+  saved_data = JSON.encode(data_to_save)
+  self.script_state = saved_data
+end
+
+function onload()
+  if saved_data ~= nil and saved_data ~= "" then
+    local loaded_data = JSON.decode(saved_data)
+    --Set up information off of loaded_data
+    memoryList = loaded_data.ml
+    memoryList = {}
+  else
+    --Set up information for if there is no saved saved data
+    memoryList = {}
+  end
+
+  if next(memoryList) == nil then
+    createSetupButton()
+  else
+    initializeScenario()
+  end
+end
+
+function createSetupButton()
+  self.createButton({
+      label="Start Tool", click_function="toolManager", function_owner=self,
+      position={0,0.3,-2}, rotation={0,180,0}, height=350, width=1500,
+      font_size=250
+  })
+end
+
+function initializeScenario()
+  self.createButton({
+      label="Initialize Scenario", click_function="scenarioInitializer", function_owner=self,
+      position={0,0.3,-2}, rotation={0,180,0}, height=350, width=2000,
+      font_size=250
+  })
+end
+
+function toolManager()
+  memoryListBackup = duplicateTable(memoryList)
+  memoryList = {}
+  enableMonsterSelector()
+  --self.clearButtons()
+  --createButtonsOnAllObjects()
+  --createSetupActionButtons()
+end
+
+function scenarioInitializer()
+end
+
+function enableMonsterSelector()
+  self.clearButtons()
+  local howManyButtons = 0
+  for monsterNumber = 1,47 do
+    local dummyIndex = howManyButtons
+    --On a normal bag, the button positions aren't the same size as the bag.
+    globalScaleFactor = 1.25 * 1/self.getScale().x
+    --Super sweet math to set button positions
+    local obj = getObjectFromGUID(monsterGuids[monsterNumber])
+    local selfPos = self.getPosition()
+    local objPos = obj.getPosition()
+    local deltaPos = findOffsetDistance(selfPos, objPos, obj)
+    local objPos = rotateLocalCoordinates(deltaPos, self)
+    objPos.x = -objPos.x * globalScaleFactor
+    objPos.y = objPos.y * globalScaleFactor
+    objPos.z = objPos.z * globalScaleFactor
+    --Offset rotation of bag
+    local rot = self.getRotation()
+    rot.y = -rot.y + 180
+    --Create function
+    local funcName = "selectButton_" .. howManyButtons
+    local func = function() buttonClick_selection(dummyIndex, obj) end
+    self.setVar(funcName, func)
+    self.createButton({
+      click_function=funcName, function_owner=self,
+      position=objPos, rotation=rot, height=1000, width=1000,
+      color={0.75,0.25,0.25,0.6},
+    })
+    howManyButtons = howManyButtons + 1
+  end
+
+  self.createButton({
+      label="Confirm Monsters", click_function="initializeButtonForSearch", function_owner=self,
+      position={0,0.3,-2}, rotation={0,180,0}, height=350, width=2000,
+      font_size=250
+  })
+end
+
+function initializeButtonForSearch()
+  self.clearButtons()
+  self.createButton({
+      label="Search for map", click_function="searchForTiles", function_owner=self,
+      position={0,0.3,-2}, rotation={0,180,0}, height=350, width=2000,
+      font_size=250
+  })
+end
+
+function searchForTiles()
+  self.clearButtons()
+  local howManyButtons = 0
+  for _, obj in ipairs(getAllObjects()) do
+    if obj ~= self and isItemInArea(obj) then
+      local dummyIndex = howManyButtons
+      --On a normal bag, the button positions aren't the same size as the bag.
+      globalScaleFactor = 1.25 * 1/self.getScale().x
+      --Super sweet math to set button positions
+      local selfPos = self.getPosition()
+      local objPos = obj.getPosition()
+      local deltaPos = findOffsetDistance(selfPos, objPos, obj)
+      local objPos = rotateLocalCoordinates(deltaPos, self)
+      objPos.x = -objPos.x * globalScaleFactor
+      objPos.y = objPos.y * globalScaleFactor
+      objPos.z = objPos.z * globalScaleFactor
+      --Offset rotation of bag
+      local rot = self.getRotation()
+      rot.y = -rot.y + 180
+      --Create function
+      local funcName = "selectButton_" .. howManyButtons
+      local func = function() mapButtonClick_selection(dummyIndex, obj) end
+      self.setVar(funcName, func)
+      self.createButton({
+        click_function=funcName, function_owner=self,
+        position=objPos, rotation=rot, height=1000, width=1000,
+        color={0.75,0.25,0.25,0.6},
+      })
+      howManyButtons = howManyButtons + 1
+    end
+  end
+
+  self.createButton({
+      label="Confirm Selection", click_function="searchForTiles", function_owner=self,
+      position={0,0.3,-2}, rotation={0,180,0}, height=350, width=2000,
+      font_size=250
+  })
+end
+
+--Utility functions
+
+--Checks or unchecks buttons
+function buttonClick_selection(index, obj)
+  local color = {0,1,0,0.6}
+  if numberOfMonsterButtons < 8 and memoryList[obj.getGUID()] == nil then
+    self.editButton({index=index, color=color})
+    --Adding pos/rot to memory table
+    local pos, rot = obj.getPosition(), obj.getRotation()
+    --I need to add it like this or it won't save due to indexing issue
+    memoryList[obj.getGUID()] = {
+      pos={x=round(pos.x,4), y=round(pos.y,4), z=round(pos.z,4)},
+      rot={x=round(rot.x,4), y=round(rot.y,4), z=round(rot.z,4)},
+      lock=obj.getLock()
+    }
+    obj.highlightOn({0,1,0})
+    numberOfMonsterButtons = numberOfMonsterButtons + 1
+  else
+    color = {0.75,0.25,0.25,0.6}
+    self.editButton({index=index, color=color})
+    if memoryList[obj.getGUID()] ~= nil then
+      numberOfMonsterButtons = numberOfMonsterButtons - 1
+      memoryList[obj.getGUID()] = nil
+    end
+    obj.highlightOff()
+  end
+end
+
+--Checks or unchecks buttons
+function mapButtonClick_selection(index, obj)
+    local color = {0,1,0,0.6}
+    if memoryList[obj.getGUID()] == nil then
+        self.editButton({index=index, color=color})
+        --Adding pos/rot to memory table
+        local pos, rot = obj.getPosition(), obj.getRotation()
+        --I need to add it like this or it won't save due to indexing issue
+        memoryList[obj.getGUID()] = {
+            pos={x=round(pos.x,4), y=round(pos.y,4), z=round(pos.z,4)},
+            rot={x=round(rot.x,4), y=round(rot.y,4), z=round(rot.z,4)},
+            lock=obj.getLock()
+        }
+        obj.highlightOn({0,1,0})
+    else
+        color = {0.75,0.25,0.25,0.6}
+        self.editButton({index=index, color=color})
+        memoryList[obj.getGUID()] = nil
+        obj.highlightOff()
+    end
+end
+
+
+--Find delta (difference) between 2 x/y/z coordinates
+function findOffsetDistance(p1, p2, obj)
+    local deltaPos = {}
+    local bounds = obj.getBounds()
+    deltaPos.x = (p2.x-p1.x)
+    deltaPos.y = (p2.y-p1.y) + (bounds.size.y - bounds.offset.y)
+    deltaPos.z = (p2.z-p1.z)
+    return deltaPos
+end
+
+--Used to rotate a set of coordinates by an angle
+function rotateLocalCoordinates(desiredPos, obj)
+	local objPos, objRot = obj.getPosition(), obj.getRotation()
+    local angle = math.rad(objRot.y)
+	local x = desiredPos.x * math.cos(angle) - desiredPos.z * math.sin(angle)
+	local z = desiredPos.x * math.sin(angle) + desiredPos.z * math.cos(angle)
+	--return {x=objPos.x+x, y=objPos.y+desiredPos.y, z=objPos.z+z}
+    return {x=x, y=desiredPos.y, z=z}
+end
+
+--Coroutine delay, in seconds
+function wait(time)
+    local start = os.time()
+    repeat coroutine.yield(0) until os.time() > start + time
+end
+
+--Duplicates a table (needed to prevent it making reference to the same objects)
+function duplicateTable(oldTable)
+    local newTable = {}
+    for k, v in pairs(oldTable) do
+        newTable[k] = v
+    end
+    return newTable
+end
+
+--Moves scripted highlight from all objects
+function removeAllHighlights()
+    for _, obj in ipairs(getAllObjects()) do
+        obj.highlightOff()
+    end
+end
+
+--Round number (num) to the Nth decimal (dec)
+function round(num, dec)
+  local mult = 10^(dec or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
+
+function isItemInArea(obj)
+  if obj == nil then
+    return false
+  end
+
+  local pos = obj.getPosition()
+  if pos.x < 12 and pos.x > -47.32 and pos.y > 1.00 and pos.z < 24.00 and pos.z > -16.72 then
+    return true
+  end
+  return false
+end
