@@ -2,58 +2,59 @@ local numberOfMonsterButtons = 0
 local disableSave = true
 
 -- All the scripted monster setups by monster card, sleeve, and bag, combat
-monsterTrackerLocations = {
+
+local monsterTrackerLocations = {
   {
-    {21.000,2.163,15.155},
-    {21.000,1.931,15.155},
-    {26.964,1.516,15.155},
-    {12.250,1.701,15.155}
-  },
-  {
-    {21.000,2.163,6.062},
-    {21.000,1.931,6.062},
-    {26.964,1.516,6.062},
-    {12.250,1.701,6.062}
-  },
-  {
-    {21.000,2.163,-3.031},
-    {21.00,1.931,-3.031},
-    {26.964,1.516,-3.031},
-    {12.250,1.701,-3.031}
-  },
-  {
-    {21.000,2.163,-12.124},
+    {21.000,3.000,-12.124},
     {21.000,1.931,-12.124},
     {26.964,1.516,-12.124},
     {12.250,1.701,-12.124}
   },
   {
-    {38.500,2.163,15.155},
-    {38.500,1.931,15.155},
-    {32.271,1.516,15.155},
-    {45.500,1.701,15.155}
+    {38.500,3.000,-12.124},
+    {38.500,1.931,-12.124},
+    {32.471,1.516,-12.124},
+    {45.500,1.701,-12.124}
   },
   {
-    {38.500,2.163,6.062},
-    {38.500,1.931,6.062},
-    {32.271,1.516,6.062},
-    {45.500,1.701,6.062}
+    {21.000,3.000,-3.031},
+    {21.00,1.931,-3.031},
+    {26.964,1.516,-3.031},
+    {12.250,1.701,-3.031}
   },
   {
-    {38.500,2.163,-3.031},
+    {38.500,3.000,-3.031},
     {38.500,1.931,-3.031},
     {32.271,1.516,-3.031},
     {45.500,1.701,-3.031}
   },
   {
-    {38.500,2.163,-12.124},
-    {38.500,1.931,-12.124},
-    {32.471,1.516,-12.124},
-    {45.500,1.701,-12.124}
-  }
+    {21.000,3.000,6.062},
+    {21.000,1.931,6.062},
+    {26.964,1.516,6.062},
+    {12.250,1.701,6.062}
+  },
+  {
+    {38.500,3.000,6.062},
+    {38.500,1.931,6.062},
+    {32.271,1.516,6.062},
+    {45.500,1.701,6.062}
+  },
+  {
+    {21.000,3.000,15.155},
+    {21.000,1.931,15.155},
+    {26.964,1.516,15.155},
+    {12.250,1.701,15.155}
+  },
+  {
+    {38.500,3.000,15.155},
+    {38.500,1.931,15.155},
+    {32.271,1.516,15.155},
+    {45.500,1.701,15.155}
+  },
 }
 
-monsterGuids = {
+local monsterGuids = {
   "e3f332","9df9ca","c730cd","97daa4","004793",
   "b0757d","9f4882","be991d","619a40","55b126",
   "c0af27","78036b","ba1b23","7d713c","c9454d",
@@ -67,208 +68,212 @@ monsterGuids = {
 }
 
 -- Monster details
-banditGuard = {
+local monsters = {
+  {
     Name = "Bandit Guard",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-banditArcher = {
+  },
+  {
     Name = "Bandit Archer",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-cityGuard = {
+  },
+  {
     Name = "City Guard",
     CardRotations = {{0,90,0},{0,0,0},{0,270,0},{0,180,0},{0,0,180},{0,270,180},{0,180,180},{0,90,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-cityArcher = {
+  },
+  {
     Name = "City Archer",
     CardRotations = {{0,90,0},{0,0,0},{0,270,0},{0,180,0},{0,0,180},{0,270,180},{0,180,180},{0,90,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-inoxArcher = {
+  },
+  {
     Name = "Inox Archer",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-inoxShaman = {
+  },
+  {
     Name = "Inox Shaman",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-inoxGuard = {
+  },
+  {
     Name = "Inox Guard",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-vermlingShaman = {
+  },
+  {
     Name = "Vermling Shaman",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-vermlingScout = {
+  },
+  {
     Name = "Vermling Scout",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 10
-}
-
-livingBones = {
+  },
+  {
     Name = "Living Bones",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 10
-}
-
-livingCorpse = {
+  },
+  {
     Name = "Living Corpse",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-livingSpirit = {
+  },
+  {
     Name = "Living Spirit",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-flameDemon = {
+  },
+  {
     Name = "Flame Demon",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-cultist = {
+  },
+  {
     Name = "Cultist",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-earthDemon = {
+  },
+  {
     Name = "Eart Demon",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-frostDemon = {
+  },
+  {
     Name = "Frost Demon",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-nightDemon = {
+  },
+  {
     Name = "Night Demon",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-windDemon = {
+  },
+  {
     Name = "Wind Demon",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-giantViper = {
+  },
+  {
     Name = "Giant Viper",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-sunDemon = {
+  },
+  {
     Name = "Sun Demon",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-caveBear = {
+  },
+  {
     Name = "Cave Bear",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 4
-}
-
-ooze = {
+  },
+  {
     Name = "Ooze",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 10
-}
-
-forestImp = {
+  },
+  {
     Name = "Forest Imp",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-ancientArtillery = {
+  },
+  {
     Name = "Ancient Artillery",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-stoneGolem = {
+  },
+  {
     Name = "Stone Golem",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-deepTerror = {
+  },
+  {
     Name = "Deep Terror",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 10
-}
-
-rendingDrake = {
+  },
+  {
     Name = "Rending Drake",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-spittingDrake = {
+  },
+  {
     Name = "Spitting Drake",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1.75,1,1.75},
     NumOfSpawns = 6
-}
-
-lurker = {
+  },
+  {
     Name = "Lurker",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-blackImp = {
+  },
+  {
     Name = "Black Imp",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 10
-}
-
-savvasLavaflow = {
+  },
+  {
     Name = "Savvas Lavaflow",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-savvasIcestorm = {
+  },
+  {
     Name = "Savvas Icestorm",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-harrowerInfester = {
+  },
+  {
     Name = "Harrower Infester",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
-}
-
-hound = {
+  },
+  {
     Name = "Hound",
     CardRotations = {{0,180,0},{0,90,0},{0,0,0},{0,270,0},{0,180,180},{0,90,180},{0,0,180},{0,270,180}},
+    CardScale = {1,1,1},
     NumOfSpawns = 6
+  }
+-- TODO: Add boses
 }
 
 function updateSave()
@@ -342,7 +347,6 @@ end
 function confirmScenarioLevel()
   local button = getScenarioButtonTable()
   placeObjects(tonumber(button.label))
-  self.clearButtons()
 end
 
 function increaseScenarioLevel()
@@ -468,7 +472,7 @@ function confirmSelection()
       local obj = getObjectFromGUID(guid)
       if obj ~= nil then obj.highlightOff() end
     end
-    broadcastToAll(count.." Objects Saved", {1,1,1})
+    broadcastToAll("Objects Saved", {1,1,1})
     updateSave()
     recallObjects()
   end
@@ -476,9 +480,9 @@ end
 
 --Sends objects from bag/table to their saved position/rotation
 function placeObjects(currLevel)
-  print(currLevel)
-
   local bagObjList = self.getObjects()
+  local currMonsterIndex = 1
+
   for guid, entry in pairs(memoryList) do
     local obj = getObjectFromGUID(guid)
 
@@ -492,7 +496,11 @@ function placeObjects(currLevel)
 
     --If obj is out on the table, move it to the saved pos/rot
     if isMonsterGuid then
-      -- TODO: Spawn monster jazz
+      if obj ~= nil then
+        local monsterObject = obj.takeObject({position = monsterTrackerLocations[currMonsterIndex][3]})
+        spawnMonsterObjects(monsterObject, currMonsterIndex, currLevel)
+        currMonsterIndex = currMonsterIndex + 1
+      end
     else
       if obj ~= nil then
         if not isMonsterGuid then
@@ -514,7 +522,7 @@ function placeObjects(currLevel)
       end
     end
   end
-  broadcastToAll("Scenario spawned", {1,1,1})
+  broadcastToAll("Objects Placed", {1,1,1})
 end
 
 --Recalls objects to bag from table
@@ -594,6 +602,41 @@ function getScenarioButtonTable()
       return scenButtons[i]
     end
   end
+end
+
+function spawnMonsterObjects(obj, currIndex, scenarioLevel)
+  local objsInBag = obj.getObjects()
+
+  local scale = {1,1,1}
+  local numOfMonsters = -1
+  local monsterSleeveRotation = {0,0,0}
+  local monsterStatSheetRotation = {0,0,0}
+
+  for i = 1, #monsters do
+    if monsters[i].Name == obj.getName() then
+      scale = monsters[i].CardScale
+      numOfMonsters = monsters[i].NumOfSpawns
+      monsterStatSheetRotation = monsters[i].CardRotations[scenarioLevel + 1]
+      break
+    end
+  end
+
+  if numOfMonsters > 6 then
+    monsterSleeveRotation = {0,0,180}
+  end
+
+  for i = 1, #objsInBag do
+    if objsInBag[i].name == obj.getName() then
+      local monsterStatSheet = obj.takeObject({position = monsterTrackerLocations[currIndex][2], rotation = monsterStatSheetRotation})
+      monsterStatSheet.setScale(scale)
+      break
+    end
+  end
+
+  local monsterSleeve = getObjectFromGUID("b26c16").takeObject({position = monsterTrackerLocations[currIndex][1], rotation = monsterSleeveRotation})
+  monsterSleeve.setScale({0.70,1,0.70})
+
+  getObjectFromGUID("f01091").takeObject({position = monsterTrackerLocations[currIndex][4], rotation = {0,180,0}})
 end
 
 --Find delta (difference) between 2 x/y/z coordinates
