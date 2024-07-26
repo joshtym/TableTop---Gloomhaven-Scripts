@@ -1,4 +1,5 @@
 local numberOfMonsterButtons = 0
+local disableSave = true
 
 -- All the scripted monster setups by monster card, sleeve, and bag, combat
 monsterTrackerLocations = {
@@ -271,17 +272,18 @@ hound = {
 }
 
 function updateSave()
-  local data_to_save = {["ml"]=memoryList}
-  saved_data = JSON.encode(data_to_save)
-  self.script_state = saved_data
+  if not disableSave then
+    local data_to_save = {["ml"]=memoryList}
+    saved_data = JSON.encode(data_to_save)
+    self.script_state = saved_data
+  end
 end
 
 function onload()
-  if saved_data ~= nil and saved_data ~= "" then
+  if not disableSave and saved_data ~= nil and saved_data ~= "" then
     local loaded_data = JSON.decode(saved_data)
     --Set up information off of loaded_data
     memoryList = loaded_data.ml
-    memoryList = {}
   else
     --Set up information for if there is no saved saved data
     memoryList = {}
@@ -314,12 +316,51 @@ function toolManager()
   memoryListBackup = duplicateTable(memoryList)
   memoryList = {}
   enableMonsterSelector()
-  --self.clearButtons()
-  --createButtonsOnAllObjects()
-  --createSetupActionButtons()
 end
 
 function scenarioInitializer()
+  self.clearButtons()
+  broadcastToAll("Select your scenario Level", {1,1,1,1})
+
+  self.createButton({
+    label="0", click_function="confirmScenarioLevel", function_owner=self,
+    position={0,0.3,-2}, rotation={0,180,0}, height=350, width=350,
+    font_size=250
+  })
+
+  self.createButton({
+    label=">", click_function="decreaseScenarioLevel", function_owner=self,
+    position = {1,0.3,-2}, rotate={0,0,0}, height=350, width=350, font_size=250
+  })
+
+  self.createButton({
+    label="<", click_function="increaseScenarioLevel", function_owner=self,
+    position = {-1,0.3,-2}, rotate={0,0,0}, height=350, width=350, font_size=250
+  })
+end
+
+function confirmScenarioLevel()
+  local button = getScenarioButtonTable()
+  placeObjects(tonumber(button.label))
+  self.clearButtons()
+end
+
+function increaseScenarioLevel()
+  local button = getScenarioButtonTable()
+  local newLevel = tonumber(button.label) + 1
+
+  if newLevel < 8 then
+    self.editButton({index = button.index, label = tostring(newLevel)})
+  end
+end
+
+function decreaseScenarioLevel()
+  local button = getScenarioButtonTable()
+  local newLevel = tonumber(button.label) - 1
+
+  if newLevel > -1 then
+    self.editButton({index = button.index, label = tostring(newLevel)})
+  end
 end
 
 function enableMonsterSelector()
@@ -362,6 +403,12 @@ end
 
 function initializeButtonForSearch()
   self.clearButtons()
+
+  for k, v in pairs(memoryList) do
+    local obj = getObjectFromGUID(k)
+    obj.highlightOff()
+  end
+
   self.createButton({
       label="Search for map", click_function="searchForTiles", function_owner=self,
       position={0,0.3,-2}, rotation={0,180,0}, height=350, width=2000,
@@ -402,10 +449,90 @@ function searchForTiles()
   end
 
   self.createButton({
-      label="Confirm Selection", click_function="searchForTiles", function_owner=self,
+      label="Confirm Selection", click_function="confirmSelection", function_owner=self,
       position={0,0.3,-2}, rotation={0,180,0}, height=350, width=2000,
       font_size=250
   })
+end
+
+--Saves selections
+function confirmSelection()
+  if next(memoryList) == nil then
+    broadcastToAll("You cannot submit without any selections.", {0.75, 0.25, 0.25})
+  else
+    self.clearButtons()
+    initializeScenario()
+    local count = 0
+    for guid in pairs(memoryList) do
+      count = count + 1
+      local obj = getObjectFromGUID(guid)
+      if obj ~= nil then obj.highlightOff() end
+    end
+    broadcastToAll(count.." Objects Saved", {1,1,1})
+    updateSave()
+    recallObjects()
+  end
+end
+
+--Sends objects from bag/table to their saved position/rotation
+function placeObjects(currLevel)
+  print(currLevel)
+
+  local bagObjList = self.getObjects()
+  for guid, entry in pairs(memoryList) do
+    local obj = getObjectFromGUID(guid)
+
+    local isMonsterGuid = false
+    for i = 1, 47 do
+      if monsterGuids[i] == guid then
+        isMonsterGuid = true
+        break
+      end
+    end
+
+    --If obj is out on the table, move it to the saved pos/rot
+    if isMonsterGuid then
+      -- TODO: Spawn monster jazz
+    else
+      if obj ~= nil then
+        if not isMonsterGuid then
+          obj.setPositionSmooth(entry.pos)
+          obj.setRotationSmooth(entry.rot)
+          obj.setLock(entry.lock)
+        end
+      else
+        --If obj is inside of the bag
+        for _, bagObj in ipairs(bagObjList) do
+          if bagObj.guid == guid then
+            local item = self.takeObject({
+                guid=guid, position=entry.pos, rotation=entry.rot,
+            })
+            item.setLock(entry.lock)
+            break
+          end
+        end
+      end
+    end
+  end
+  broadcastToAll("Scenario spawned", {1,1,1})
+end
+
+--Recalls objects to bag from table
+function recallObjects()
+  for guid, entry in pairs(memoryList) do
+    local isGuidMonster = false
+    for i = 1,47 do
+      if monsterGuids[i] == guid then
+        isGuidMonster = true
+        break
+      end
+    end
+    if not isGuidMonster then
+      local obj = getObjectFromGUID(guid)
+      if obj ~= nil then self.putObject(obj) end
+    end
+  end
+  broadcastToAll("Objects Recalled", {1,1,1})
 end
 
 --Utility functions
@@ -458,6 +585,16 @@ function mapButtonClick_selection(index, obj)
     end
 end
 
+function getScenarioButtonTable()
+  local scenButtons = self.getButtons()
+  local index = -1
+
+  for i = 1, #scenButtons do
+    if scenButtons[i].label ~= "<" and scenButtons[i].label ~= ">" then
+      return scenButtons[i]
+    end
+  end
+end
 
 --Find delta (difference) between 2 x/y/z coordinates
 function findOffsetDistance(p1, p2, obj)
